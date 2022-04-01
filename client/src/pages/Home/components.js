@@ -48,21 +48,39 @@ export const MainBody = styled.div`
     align-items: center;
     justify-content: space-around;
     h1 {
-        color: #2b2b2b;
+        color: #32537C;
         font-size: 5rem;
     }
 `;
 export const MainBodyLeft = styled.div`
     display: flex;
     flex-direction: column;
+    width: 50%;
 `;
 export const Image = styled.img`
     width: 640px;
 `;
 export const MainTagline = styled.p`
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Secular+One&display=swap');
-    font-family: 'Quicksand', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Quicksand&family=Secular+One&display=swap');
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 1.4rem;
-    color: #5e5e5e;
-    letter-spacing: 1px;
+    color: #424242;
+`;
+export const Button = styled.button`
+    background-color: #FF287E;
+    color: #fff;
+    display: flex;
+    margin: 10px auto;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    padding: 12px 60px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: 0.2s all ease;
+    cursor: pointer;
+    &:hover {
+        background-color: #e32471;
+    }
 `;
