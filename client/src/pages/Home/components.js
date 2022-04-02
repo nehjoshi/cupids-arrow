@@ -59,6 +59,7 @@ export const MainBodyLeft = styled.div`
 `;
 export const Image = styled.img`
     width: 640px;
+    object-fit: cover;
 `;
 export const MainTagline = styled.p`
     @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Quicksand&family=Secular+One&display=swap');

@@ -5,13 +5,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.PORT || 5000;
-app.use(cors())
+app.use(cors());
+app.use(server.json());
+const Register = require("./routes/Register");
 
-app.get("/", (req, res) => {
-    return res.json({
-        message: "Hello world"
-    })
-});
+app.use("/", Register);
 
 mongoose.connect(process.env.URI, {
     useNewUrlParser: true,
