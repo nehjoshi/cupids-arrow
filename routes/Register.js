@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
     if (!email || !name || !password) {
         return res.status(400).json({ msg: "Please enter all fields" });
     }
-    const User = await mongoose.model('cupids-arrow', UserModel);
+    const User = await mongoose.model('cupids-arrow', UserModel, 'cupids-arrow');
     console.log("Works till here");
     // const emailExists = await User.findOne({ email });
     // console.log("Works till heressdsdsd");

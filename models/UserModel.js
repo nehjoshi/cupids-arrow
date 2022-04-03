@@ -14,3 +14,4 @@ const schema = new mongoose.Schema({
         required: true,
     },
 }, {timestamps: true, collection: 'cupids-arrow'});
+module.exports = schema;
