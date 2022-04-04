@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import "./App.css";
 import Login from './pages/Login';
+import Gender from './pages/Gender';
 
 export default function App() {
 
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/gender" element={<Gender />} />
       </Routes>
     </BrowserRouter>
   )
