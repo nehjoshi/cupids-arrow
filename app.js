@@ -8,8 +8,10 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(server.json());
 const Register = require("./routes/Register");
+const Login = require("./routes/Login");
 
 app.use("/", Register);
+app.use("/", Login);
 
 mongoose.connect(process.env.URI, {
     useNewUrlParser: true,

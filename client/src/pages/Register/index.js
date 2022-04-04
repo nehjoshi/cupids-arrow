@@ -7,18 +7,25 @@ import axios from "axios";
 export default function Register() {
 
   const [loader, setLoader] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = () => {
-    setLoader(true);
-    axios.post('http://localhost:5000/register', {
-      email: "nehjoshi5@gmail.com",
-      name: "Nehjoshi",
-      password: "12345678"
-    })
-      .then(res => {
-        console.log(res);
-        setLoader(false);
-      });
+    if (confirmPassword === password) {
+      setLoader(true);
+      axios.post('http://localhost:5000/register', {
+        email: email,
+        name: name,
+        password: password
+      })
+        .then(res => {
+          console.log(res);
+          sessionStorage.setItem("token", res.data.token);
+          setLoader(false);
+        });
+    }
   }
 
   return (
@@ -32,13 +39,13 @@ export default function Register() {
         <BoxRight>
           <h1>Sign Up to Get Started</h1>
           <FormLabel>Name</FormLabel>
-          <FormInput type="text" placeholder="Name" />
+          <FormInput type="text" placeholder="Name" onChange={e => setName(e.target.value)}/>
           <FormLabel>E-mail</FormLabel>
-          <FormInput type="text" placeholder="abc@example.com" />
+          <FormInput type="text" placeholder="abc@example.com" onChange={e => setEmail(e.target.value)}/>
           <FormLabel>Password</FormLabel>
-          <FormInput type="password" />
+          <FormInput type="password" onChange={e => setPassword(e.target.value)}/>
           <FormLabel>Confirm Password</FormLabel>
-          <FormInput type="password" />
+          <FormInput type="password" onChange={e => setConfirmPassword(e.target.value)} />
           {!loader &&
             <SubmitButton onClick={handleSubmit}>Sign Up</SubmitButton>}
           {loader && <Loader />}

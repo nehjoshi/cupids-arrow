@@ -120,3 +120,7 @@ export const SubmitButtonDisabled = styled.div`
     align-items: center;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
+export const Span = styled.p`
+    text-align: center;
+    margin-top: 10px;
+`;
