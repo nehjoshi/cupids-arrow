@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 router.post('/login', async (req, res) => {
     const {email, password} = req.body;
-    const User = mongoose.model('cupids-arrow', UserModel, 'cupids-arrow');
+    const User = await mongoose.model('cupids-arrow', UserModel, 'cupids-arrow');
     const emailExists = await User.findOne({email});
     if (!emailExists) return res.status(400).json({msg: "Email does not exist"});
     const isMatch = await bcrypt.compare(password, emailExists.password);

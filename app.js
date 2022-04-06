@@ -9,9 +9,11 @@ app.use(cors());
 app.use(server.json());
 const Register = require("./routes/Register");
 const Login = require("./routes/Login");
+const SetGender = require("./routes/SetGender");
 
 app.use("/", Register);
 app.use("/", Login);
+app.use("/", SetGender);
 
 mongoose.connect(process.env.URI, {
     useNewUrlParser: true,

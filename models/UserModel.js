@@ -13,5 +13,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    gender: {
+        type: String,
+        required: false
+    }
 }, {timestamps: true, collection: 'cupids-arrow'});
 module.exports = schema;

@@ -89,9 +89,11 @@ export const FormInput = styled.input`
         border: 1px solid #32537C;
     }
 `;
-export const SubmitButton = styled.div`
+export const SubmitButton = styled.button`
     width: 100%;
     height: 42px;
+    outline: none;
+    border: none;
     background-color: #FF287E;
     border-radius: 5px;
     color: #fff;
