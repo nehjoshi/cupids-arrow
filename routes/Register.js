@@ -21,6 +21,7 @@ router.post('/register', async (req, res) => {
         email,
         name,
         password: hashedPassword,
+        gender: ""
     });
 
     try {

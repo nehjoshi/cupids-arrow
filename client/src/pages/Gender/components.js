@@ -87,20 +87,6 @@ export const SubmitButton = styled.button`
         background-color: #d01e6c;
     }
 `;
-export const SubmitButtonDisabled = styled.div`
-    width: 60%;
-    height: 42px;
-    outline: none;
-    border: none;
-    background-color: #FF287E;
-    margin: 100px auto;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    transition: 0.2s all ease;
-    font-size: 1.3rem;
+export const SubmitButtonDisabled = styled(SubmitButton)`
     opacity: 0.3;
 `;
