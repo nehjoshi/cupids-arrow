@@ -3,19 +3,33 @@ const schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
+        default: "",
     },
-    name: {
+    firstName: {
         type: String,
         required: true,
+        default: "",
     },
-    password: {
+    lastName: {
         type: String,
         required: true,
+        default: "",
+    },
+    dateOfBirth: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    country: {
+        type: String,
+        required: true,
+        default: "",
     },
     gender: {
         type: String,
-        required: false
+        required: false,
+        default: "",
     }
 }, {timestamps: true, collection: 'cupids-arrow'});
-module.exports = schema;
+const model = mongoose.model('Users', schema, 'cupids-arrow');
+module.exports = model;

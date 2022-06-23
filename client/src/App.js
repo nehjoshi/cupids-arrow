@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import "./App.css";
-import Login from './pages/Login';
-import Gender from './pages/Gender';
+import "./scss/Global.module.scss";
 
 export default function App() {
 
@@ -13,8 +12,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/gender" element={<Gender />} />
       </Routes>
     </BrowserRouter>
   )

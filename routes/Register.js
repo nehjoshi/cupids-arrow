@@ -1,36 +1,40 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
-const UserModel = require("../models/UserModel");
+const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require('nodemailer');
 
-router.post('/register', async (req, res) => {
-    const { email, name, password } = req.body;
-    console.log("Works till here");
-    if (!email || !name || !password) {
-        return res.status(400).json({ msg: "Please enter all fields" });
-    }
-    const User = await mongoose.model('cupids-arrow', UserModel, 'cupids-arrow');
-    const emailExists = await User.findOne({ email });
-    
-    if (emailExists) return res.status(400).json({ msg: "Email already exists" });
-
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+router.post('/users/register', async (req, res) => {
+    const {email, firstName, lastName, date, country, gender} = req.body;
+    const transporter = nodemailer.createTransport({
+        port: 465,
+        host: "GMAIL",
+        auth: {
+            user: process.env.GMAIL_USERNAME,
+            pass: process.env.PASSWORD
+        },
+        secure: true
+    })
+    const emailExists = await User.findOne({email: email})
+    if (emailExists) return res.status(409).json({message: "Email already exists"});
     const newUser = new User({
-        email,
-        name,
-        password: hashedPassword,
-        gender: ""
+        email, firstName, lastName, dateOfBirth: date, country, gender
     });
+    await newUser.save()
+    .then(() => {
+        console.log("New user!")
+        transporter.sendMail({
+            from: "The Cupid's Arrow Team",
+            to: email,
+            subject: "Thank you for registering",
+            html: `<b>Thank you for registering!</b>`
+        })
+        return res.status(200);
+    })
+    .catch(e => {
+        console.log(e);
+    })
 
-    try {
-        await newUser.save();
-        const token = await jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(201).json({ msg: "User created", success: true, token });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Server Error");
-    }
 });
 module.exports = router;

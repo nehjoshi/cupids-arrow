@@ -1,0 +1,152 @@
+$blue: #2E86AB;
+$gray: #c9c9c9;
+$lg: 1200px;
+$md: 768px;
+$sm: 320px;
+.wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: url("../images/AuthBg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;  
+    font-weight: 300;
+}
+.box {
+    width: 50%;
+    background-color: #fff;
+    min-height: 600px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 30px 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Nunito Sans";
+    @media screen and (max-width: $lg) {
+        width: 90%;
+        padding: 20px 20px;
+    }
+}
+.heading {
+    font-weight: bold;
+    font-size: clamp(2rem, 2.5vw, 2.4rem);
+    text-align: center;
+}
+.dividerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.divider {
+    width: 40%;
+    height: 1px;
+    background-color: #8c8c8c;
+}
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $blue;
+    margin: 0px 10px;
+}
+
+.form {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    
+
+}
+.detailsHeading {
+    font-size: 2rem;
+    font-family: "Nunito Sans";
+    font-weight: bold;
+    color: rgb(56, 56, 56);
+    margin-bottom: 20px;
+    @media screen and (max-width: $lg) {
+        text-align: center;
+    }
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    @media screen and (max-width: $lg) {
+        flex-direction: column;
+        margin-bottom: 0px;
+    }
+    
+}
+.formItem {
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: $lg) {
+        margin-top: 20px;
+    }
+}
+.label {
+    font-size: 1.2rem;
+    font-family: "Nunito Sans";
+    font-weight: 700;
+    color: #000;
+}
+.input {
+    width: 180px;
+}
+.noticeRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    @media screen and (max-width: $lg) {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+.notice {
+    font-size: 1.3rem;
+    font-family: "Nunito Sans";
+    color: $blue;
+    margin-left: 10px;
+    @media screen and (max-width: $md) {
+        font-size: 1rem;
+    }
+}
+.next {
+    font-size: 1.7rem;
+}
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 200px;
+    padding-left: 10px;
+    padding-right: 30px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 5px;
+    background-color: #eb3841;
+    width: fit-content;
+    margin: 0px auto;
+    font-size: 1.3rem;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s all ease;
+    &:hover {
+        background-color: #d2322d;
+    }
+}
+.disabled {
+    opacity: 0.5;
+    color: #000;
+    cursor: auto;
+    &:hover {
+        background-color: #eb3841;
+    }
+}
