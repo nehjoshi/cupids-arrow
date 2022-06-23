@@ -29,6 +29,14 @@ const schema = new mongoose.Schema({
         type: String,
         required: false,
         default: "",
+    },
+    emailToken: {
+        type: String,
+        default: ""
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true, collection: 'cupids-arrow'});
 const model = mongoose.model('Users', schema, 'cupids-arrow');

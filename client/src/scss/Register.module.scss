@@ -150,3 +150,13 @@ $sm: 320px;
         background-color: #eb3841;
     }
 }
+.success, .error {
+    font-size: 1.3rem;
+    font-family: "Nunito Sans";
+    color: #047c24;
+    margin-top: 20px;
+    text-align: center;
+}
+.error {
+    color: #ff0000;
+}

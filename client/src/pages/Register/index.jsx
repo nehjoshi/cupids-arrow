@@ -6,9 +6,10 @@ import DatePicker from "react-multi-date-picker";
 import { MenuItem, Select } from '@mui/material';
 import { countryList, genders } from './data';
 import Checkbox from '@mui/material/Checkbox';
-import {MdNavigateNext} from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
 import { useEffect } from 'react';
 import { SubmitData } from './handler';
+import Loader from "../../components/Loader"
 
 export default function Register() {
 
@@ -20,21 +21,43 @@ export default function Register() {
   const [country, setCountry] = useState("Choose a Country");
   const [agrees, setAgrees] = useState(false);
   const [allowProceed, setAllowProceed] = useState(false);
-
-  const handleSubmit = () => {
-    const data = {email, firstName, lastName, date, gender, country}
-    SubmitData(data)
-    .then(res => {
-      console.log(res.status);
-    })
-  }
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    if (email !== "" && firstName!=="" && lastName!=="" && gender!=="Choose a Gender" && country!=="Choose a Country" && agrees===true){
+    if (email !== "" && firstName !== "" && lastName !== "" && gender !== "Choose a Gender" && country !== "Choose a Country" && agrees === true) {
       setAllowProceed(true);
     }
-  }, [email, firstName, lastName, gender, country, agrees])
+    if (success) {
+      setFirstName("");
+      setLastName("");
+      setDate(new Date());
+      setGender("Choose a Gender");
+      setAgrees(false);
+      setCountry("Choose a Country")
+    }
+  }, [email, firstName, lastName, gender, country, agrees, success])
 
+  const handleSubmit = () => {
+    setLoading(true);
+    setError(false);
+    const data = { email, firstName, lastName, date, gender, country }
+    SubmitData(data)
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          setLoading(false);
+          setSuccess(true);
+        }
+      })
+      .catch(err => {
+        if (err.response.status === 406){
+          setLoading(false);
+          setError(true);
+        }
+      })
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -51,7 +74,7 @@ export default function Register() {
           <div className={styles.row}>
             <div className={styles.formItem}>
               <label className={styles.label}>First Name</label>
-              <TextField variant="standard" placeholder="Jon" size='large' value={firstName} onChange={e => setFirstName(e.target.value)}/>
+              <TextField variant="standard" placeholder="Jon" size='large' value={firstName} onChange={e => setFirstName(e.target.value)} />
             </div>
             <div className={styles.formItem}>
               <label className={styles.label}>Last Name</label>
@@ -88,20 +111,24 @@ export default function Register() {
             </div>
           </div>
           <div className={styles.noticeRow}>
-            <Checkbox checked={agrees} onClick={() => setAgrees(!agrees)}/>
-            <p className={styles.notice}>By clicking submit, I consent to submitting my information to Cupid's Arrow©.</p>
+            <Checkbox checked={agrees} onClick={() => setAgrees(!agrees)} />
+            <p className={styles.notice}>By clicking next, I consent to submitting my information to Cupid's Arrow©.</p>
           </div>
-          {allowProceed ? 
-          <div className={styles.button} onClick={handleSubmit}>
-            <MdNavigateNext className={styles.next} color="white"/>
-            <p style={{textAlign: 'center'}}>Next</p>
-          </div>
-          :
-          <div className={`${styles.button} ${styles.disabled}`}>
-            <MdNavigateNext className={styles.next} color="white"/>
-            <p style={{textAlign: 'center'}}>Next</p>
-          </div>
-}
+          {allowProceed && !loading && !success &&
+
+            <div className={styles.button} onClick={handleSubmit}>
+              <MdNavigateNext className={styles.next} color="white" />
+              <p style={{ textAlign: 'center' }}>Next</p>
+            </div>
+          }
+          {!allowProceed && <div className={`${styles.button} ${styles.disabled}`}>
+            <MdNavigateNext className={styles.next} color="white" />
+            <p style={{ textAlign: 'center' }}>Next</p>
+          </div>}
+
+          {loading && !success && <Loader />}
+          {success && <p className={styles.success}>Please check your email to complete your registration.</p>}
+          {error && <p className={styles.error}>An account already exists with the provided email. Please use another email.</p>}
         </div>
       </div>
     </div >
